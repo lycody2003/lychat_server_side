@@ -1,8 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nginx
-  namespace: nginx
+  name: nginx-deployment
   labels:
     app: nginx
 spec:
@@ -15,15 +14,21 @@ spec:
       labels:
         app: nginx
     spec:
+      volumes:
+      - name: shared-date-logs
+        emptyDir: {}
       containers:
-        - name: nginx
-          image: nginx
-          ports:
-            - containerPort: 80
-          resources:
-            requests:
-              cpu: 50m
-              memory: 64Mi
-            limits:
-              cpu: 200m
-              memory: 128Mi
+      - name: container-writing-dates
+        image: alpine
+        command: ["/bin/sh"]
+        args: ["-c", "while true; do date >> /var/log/index.html; sleep 10;done"]
+        volumeMounts:
+        - name: shared-date-logs
+          mountPath: /var/log
+      - name: container-serving-dates
+        image: nginx:1.20.0
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - name: shared-date-logs
+          mountPath: /usr/share/nginx/html

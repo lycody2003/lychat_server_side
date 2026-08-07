@@ -1,4 +1,15 @@
-node_modules/
+# Dependencies
+node_modules
+
+# Env files (never commit secrets)
 .env
+.env.*.local
+
+# OS/editor junk
 .DS_Store
+.vscode
+.idea
+
+# Logs
 *.log
+npm-debug.log*

@@ -1,14 +1,18 @@
-FROM node:22-alpine
+# Dependencies (reinstalled fresh in the image)
+node_modules
 
-WORKDIR /app
+# Version control
+.git
+.github
+.gitignore
 
-# Install dependencies first (better layer caching)
-COPY backend/package*.json ./
-RUN npm ci --omit=dev
+# Env files (inject via K8s secrets/configmaps at runtime instead)
+.env
+.env.example
 
-# Copy the rest of the backend app
-COPY backend/. .
+# OS/editor junk
+.DS_Store
 
-EXPOSE 80
-
-CMD ["node", "server.js"]
+# Docker-related (no need inside the image)
+Dockerfile
+.dockerignore

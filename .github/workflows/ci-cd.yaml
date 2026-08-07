@@ -16,8 +16,10 @@ jobs:
         with:
           node-version: '22'
           cache: 'npm'
+          cache-dependency-path: backend/package-lock.json
 
       - name: Install dependencies
+        working-directory: ./backend
         run: npm ci
 
   docker:

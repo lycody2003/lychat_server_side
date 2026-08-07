@@ -1,6 +1,9 @@
 
 ```bash
 lychat_server_side/
+├── .github/
+│   ├── workflows/
+│   │   ├── ci-cd.yaml
 ├── backend/
 │   ├── config/
 │   ├── middleware/
@@ -11,20 +14,12 @@ lychat_server_side/
 │   ├── package-lock.json
 │   └── server.js
 ├── k8s/
-│   ├── namespace.yaml
 │   ├── backend/
 │   │   ├── deployment.yaml
 │   │   └── service.yaml
 │   ├── mongodb/
-│   │   ├── statefulset.yaml
 │   │   ├── service.yaml
 │   │   └── pvc.yaml
-│   ├── redis/
-│   │   ├── deployment.yaml
-│   │   └── service.yaml
-│   └── ingress.yaml
-├── nginx/
-│   └── nginx.conf
 ├── Dockerfile
 ├── .dockerignore
 └── .gitignore

@@ -51,13 +51,8 @@ jobs:
           cache-to: type=gha,mode=max
 
   deploy:
-      runs-on: ubuntu-22.04
+      runs-on: self-hosted
       needs: docker
       steps:
-        - name: Set up kubeconfig
-          run: |
-            mkdir -p ~/.kube
-            echo "${{ secrets.KUBECONFIG_DATA }}" | base64 -d > ~/.kube/config
-
         - name: Rollout restart
           run: kubectl rollout restart deployment/lychat-backend

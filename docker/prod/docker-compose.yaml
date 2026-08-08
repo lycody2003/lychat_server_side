@@ -15,29 +15,19 @@ services:
     networks:
       - lychat_network
 
-  # redis:
-  #   image: redis:7-alpine
-  #   container_name: lychat_redis
-  #   restart: unless-stopped
-  #   ports:
-  #     - "6379:6379"
-  #   networks:
-  #     - lychat_network
-
   server:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: docker/prod/Dockerfile
     container_name: lychat_server
     restart: unless-stopped
     ports:
-      - "5050:5050"
+      - "30008:5008"
     env_file:
       - .env
     environment:
       MONGO_URI: mongodb://Lycody:Admin%40123@mongodb:27017/lychat?authSource=admin
-      # REDIS_URI: redis://redis:6379
-      CLIENT_URL: http://localhost:8080
+      CLIENT_URL: http://192.168.252.130:30088
     depends_on:
       - mongodb
     networks:

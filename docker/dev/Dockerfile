@@ -8,6 +8,6 @@ RUN npm ci --omit=dev
 
 COPY . .
 
-EXPOSE 5050
+EXPOSE 3004
 
 CMD ["node", "server.js"]

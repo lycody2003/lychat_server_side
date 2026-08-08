@@ -1,5 +1,3 @@
-version: "3.9"
-
 services:
   mongodb:
     image: mongo:7
@@ -15,26 +13,42 @@ services:
     networks:
       - lychat_network
 
+  redis:
+    image: redis:8
+    container_name: lychat_redis
+    restart: unless-stopped
+    ports:
+      - "6378:6379"
+    command: redis-server --requirepass "Admin@123"
+    volumes:
+      - redis_data:/data
+    networks:
+      - lychat_network
+
   server:
     build:
-      context: .
+      context: ../..
       dockerfile: docker/dev/Dockerfile
     container_name: lychat_server
     restart: unless-stopped
     ports:
       - "3004:3004"
-    env_file:
-      - .env
     environment:
+      PORT: 3004
       MONGO_URI: mongodb://Lycody:Admin%40123@mongodb:27017/lychat?authSource=admin
+      REDIS_URL: redis://:Admin%40123@redis:6379
+      JWT_SECRET: lychat_super_secret_change_this
+      JWT_EXPIRES_IN: 7d
       CLIENT_URL: http://localhost:3002
     depends_on:
       - mongodb
+      - redis
     networks:
       - lychat_network
 
 volumes:
   mongo_data:
+  redis_data:
 
 networks:
   lychat_network:

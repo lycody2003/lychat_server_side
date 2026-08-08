@@ -14,5 +14,8 @@ node_modules
 .DS_Store
 
 # Docker-related (no need inside the image)
-Dockerfile
+docker/dev/Dockerfile
+docker/prod/Dockerfile
+docker/dev/docker-compose.yaml
+docker/prod/docker-compose.yaml
 .dockerignore

@@ -54,6 +54,7 @@ app.get("/api/health", (req, res) =>
   res.json({
     status: "ok",
     app: "Lychat API",
+    version: "1.0.3"
   })
 );
 

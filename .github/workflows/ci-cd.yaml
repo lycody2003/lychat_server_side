@@ -48,4 +48,4 @@ jobs:
             ${{ secrets.DOCKERHUB_USERNAME }}/lychat_server_side:1.0.3
             ${{ secrets.DOCKERHUB_USERNAME }}/lychat_server_side:${{ github.sha }}
           cache-from: type=gha
-          cache-to: type=gha,mode=max 
+          cache-to: type=gha,mode=max

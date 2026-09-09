@@ -1,0 +1,15 @@
+name: my-backend
+
+services:
+  backend:
+    type: application
+
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+
+    port: 3004
+    expose: true
+
+    env:
+      NODE_ENV: production

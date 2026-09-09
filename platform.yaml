@@ -1,6 +1,7 @@
 name: lychat
 
 services:
+
   api:
     type: application
 
@@ -9,9 +10,7 @@ services:
       dockerfile: ./Dockerfile
 
     port: 5008
-
     replicas: 1
-
     expose: true
 
     health:
@@ -24,23 +23,15 @@ services:
     env:
       NODE_ENV: production
       PORT: "5008"
-
-      MONGO_URI: "${mongo.url}"
-
-      REDIS_URL: "${redis.url}"
+      MONGO_URI: ${mongo.url}
+      REDIS_URL: ${redis.url}
 
   mongo:
     type: database
-
-    engine: mongodb
-
+    image: mongo:7
     port: 27017
-
-    storage: 10Gi
 
   redis:
     type: cache
-
-    engine: redis
-
+    image: redis:7-alpine
     port: 6379

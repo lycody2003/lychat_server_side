@@ -1,6 +1,19 @@
-name: lychat
-
 services:
+
+  mongo:
+    type: database
+    image: mongo:7
+    port: 27017
+
+    storage:
+      enabled: true
+      size: 10Gi
+      mountPath: /data/db
+
+  redis:
+    type: cache
+    image: redis:7-alpine
+    port: 6379
 
   api:
     type: application
@@ -11,27 +24,9 @@ services:
 
     port: 5008
     replicas: 1
-    expose: true
-
-    health:
-      path: /api/health
-      initialDelaySeconds: 15
-      periodSeconds: 10
-      timeoutSeconds: 5
-      failureThreshold: 6
 
     env:
       NODE_ENV: production
       PORT: "5008"
       MONGO_URI: ${mongo.url}
       REDIS_URL: ${redis.url}
-
-  mongo:
-    type: database
-    image: mongo:7
-    port: 27017
-
-  redis:
-    type: cache
-    image: redis:7-alpine
-    port: 6379

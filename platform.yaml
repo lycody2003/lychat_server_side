@@ -24,3 +24,23 @@ services:
     env:
       NODE_ENV: production
       PORT: "5008"
+
+      MONGO_URI: "${mongo.url}"
+
+      REDIS_URL: "${redis.url}"
+
+  mongo:
+    type: database
+
+    engine: mongodb
+
+    port: 27017
+
+    storage: 10Gi
+
+  redis:
+    type: cache
+
+    engine: redis
+
+    port: 6379

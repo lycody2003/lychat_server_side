@@ -32,9 +32,7 @@ const corsOptions = {
     ) {
       callback(null, true);
     } else {
-      callback(
-        new Error(`CORS blocked: ${origin} not in allowed list`)
-      );
+      callback(new Error(`CORS blocked: ${origin} not in allowed list`));
     }
   },
   credentials: true,
@@ -54,8 +52,8 @@ app.get("/api/health", (req, res) =>
   res.json({
     status: "ok",
     app: "Lychat API",
-    version: "1.0.3"
-  })
+    version: "1.0.3",
+  }),
 );
 
 app.use("/api/auth", authRoutes);
@@ -66,7 +64,7 @@ app.use("/api/friends", friendRoutes);
 app.use((req, res) =>
   res.status(404).json({
     message: "Route not found",
-  })
+  }),
 );
 
 app.use((err, req, res, next) => {
@@ -87,9 +85,7 @@ const startServer = async () => {
     initChatSocket(io);
 
     server.listen(PORT, "0.0.0.0", () => {
-      console.log(
-        `🚀 Lychat API running on ${PORT}`
-      );
+      console.log(`Server running on port ${PORT}`);
     });
   } catch (error) {
     console.error("❌ Failed to start server:", error);

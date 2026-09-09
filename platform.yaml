@@ -1,4 +1,4 @@
-name: my-backend
+name: lychat-api
 
 services:
   backend:
@@ -8,8 +8,13 @@ services:
       context: .
       dockerfile: ./Dockerfile
 
-    port: 3004
+    port: 5008
+
     expose: true
+
+    health:
+      path: /api/health
 
     env:
       NODE_ENV: production
+      PORT: "5008"

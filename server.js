@@ -77,7 +77,7 @@ app.use((err, req, res, next) => {
   });
 });
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5008;
 
 const startServer = async () => {
   try {
@@ -86,7 +86,7 @@ const startServer = async () => {
 
     initChatSocket(io);
 
-    server.listen(PORT, () => {
+    server.listen(PORT, "0.0.0.0", () => {
       console.log(
         `🚀 Lychat API running on ${PORT}`
       );

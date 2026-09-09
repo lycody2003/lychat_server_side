@@ -1,4 +1,4 @@
-name: lychat
+name: lychat-api
 
 services:
   api:
@@ -10,10 +10,16 @@ services:
 
     port: 5008
 
+    replicas: 1
+
     expose: true
 
     health:
       path: /api/health
+      initialDelaySeconds: 10
+      periodSeconds: 10
+      timeoutSeconds: 3
+      failureThreshold: 6
 
     env:
       NODE_ENV: production

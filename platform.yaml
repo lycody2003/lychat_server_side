@@ -1,4 +1,4 @@
-name: lychat-api
+name: lychat
 
 services:
   api:

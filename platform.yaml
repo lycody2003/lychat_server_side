@@ -7,6 +7,10 @@ services:
     image: mongo:7
     port: 27017
 
+    # security:
+    #   username: lycody
+    #   password: Admin@123
+
     storage:
       enabled: true
       size: 10Gi
@@ -16,6 +20,10 @@ services:
     type: cache
     image: redis:7-alpine
     port: 6379
+
+    # security:
+    #   username: lycody
+    #   password: Admin@123
 
   api:
     type: application
